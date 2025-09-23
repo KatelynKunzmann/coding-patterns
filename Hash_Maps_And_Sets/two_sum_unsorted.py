@@ -7,9 +7,7 @@ Space: O(n)
 def two_sum(nums: List[int], target: int) -> List[int]
     num_map = {}
     for i, num in enumerate(nums):
-        num_map[num] = i
-    for i, num in enumerate(nums):
         comp = target - num
-        if comp in num_map and num_map[comp] != i:
-            return [i, num_map[comp]]
-    return []
+        if comp in num_map:
+            return [num_map[comp], i]
+        num_map[num] = i
