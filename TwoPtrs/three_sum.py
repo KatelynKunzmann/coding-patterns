@@ -1,3 +1,5 @@
+from typing import List
+
 """ Leetcode Problem 15: 3Sum https://leetcode.com/problems/3sum/
 Skip dupes twice - at the first value and the pointer we advance
 Only need to skip dupes on the side we advance (left side here)
@@ -6,27 +8,30 @@ Time: O(n^2)
 Space: O(1)
 """
 
+
 def threeSum(self, nums: List[int]) -> List[List[int]]:
     nums.sort()
     triplets = []
     for i, val in enumerate(nums):
-        if nums[i] > 0: break
-        if i > 0 and val == nums[i-1]:
+        if nums[i] > 0:
+            break
+        if i > 0 and val == nums[i - 1]:
             continue
-        left = i+1
+        left = i + 1
         right = len(nums) - 1
         while left < right:
             threesum = val + nums[left] + nums[right]
             if threesum == 0:
                 triplets.append([val, nums[left], nums[right]])
                 left += 1
-                while left < right and nums[left] == nums[left-1]:
+                while left < right and nums[left] == nums[left - 1]:
                     left += 1
             elif threesum < 0:
                 left += 1
             elif threesum > 0:
                 right -= 1
     return triplets
+
 
 """
 "Why is sorting necessary?"

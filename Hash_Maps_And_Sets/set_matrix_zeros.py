@@ -1,11 +1,13 @@
+from typing import List
+
 """Leetcode problem 73: Set Matrix Zeroes https://leetcode.com/problems/set-matrix-zeroes/
 1) Set up variables, check if empty matrix
 2) Pass 1: Traverse through the matrix to identify the rows and columns
 containing zeros and store their indexes in hash sets
 3) Pass 2: Traverse again and set any cell in the matrix to zero
 if its row index is in 'zero_rows' hash set or its column index is in 'zero_cols' hash set
-Time: O(n^2)
-Space: O(n^2)
+Time: O(m x n)
+Space: O(m + n)
 """
 
 

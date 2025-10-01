@@ -1,7 +1,10 @@
+from typing import List
+
 """ Leetcode problem 11: Container With Most Water https://leetcode.com/problems/container-with-most-water/
 Time: O(n)
 Space: O(1)
 """
+
 
 def maxArea(self, height: List[int]) -> int:
     left = 0
@@ -10,7 +13,7 @@ def maxArea(self, height: List[int]) -> int:
     while left < right:
         curr_area = min(height[left], height[right]) * (right - left)
         max_area = max(curr_area, max_area)
-        if height[left] < height [right]:
+        if height[left] < height[right]:
             left += 1
         else:
             right -= 1
