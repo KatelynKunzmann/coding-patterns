@@ -16,6 +16,9 @@ def isAnagram(self, s: str, t: str) -> bool:
 
 
 """
+'What if the inputs contain Unicode characters? How would you adapt your solution to such a case?'
+Python strings are Unicode by default and the equality check would still work
+
 'Is there a more optimal solution?'
 Yes, we could use Counter
 Time: 
