@@ -8,7 +8,7 @@ Space: O(1)
 
 
 def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-    if not head: 
+    if not head:
         return []
     dummy = ListNode(-1)
     dummy.next = head
@@ -23,6 +23,7 @@ def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNod
     trailer.next = trailer.next.next
     return dummy.next
 
+
 """What if the list has only 1 node and n = 1? (Should return None).
     
 What if n equals the length of the list? (You remove the head).
@@ -34,8 +35,6 @@ What if head is None (empty list)?
 Why not just start leader = trailer = head?
 
 What happens if you try removing the head without a dummy?
-
-Can you explain how dummy makes head removal easier?
 
 Can you return an exception if n > length of the list?
 Sure, raise ValueError("n is larger than the length of the list")
