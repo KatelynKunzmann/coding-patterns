@@ -19,6 +19,8 @@ class ListNode:
 
 
 def linked_list_reversal(head: ListNode) -> ListNode:
+    if not head:
+        return None
     curr_node = head
     prev_node = None
     while curr_node:

@@ -1,4 +1,5 @@
 from typing import List
+
 """
 You need to design two functions:
 encode(strs: List[str]) -> str
@@ -20,6 +21,7 @@ print(encoded)
 decoded = decode(encoded)
 print(decoded)        # ["hello###", "world"]
 """
+
 
 class Codec_Sol:
     def encode(self, strs: List[str]) -> str:

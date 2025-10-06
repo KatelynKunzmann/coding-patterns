@@ -38,7 +38,8 @@ Total space including output → O(nk)
 
 
 def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-    if not strs: return [[]]
+    if not strs:
+        return [[]]
     groups = defaultdict(list)
 
     for s in strs:
@@ -56,14 +57,16 @@ Time: O(nk)
 Space: O(nk)
 """
 
+
 def groupAnagramsOptimized(self, strs: List[str]) -> List[List[str]]:
-    if not strs: return [[]]
+    if not strs:
+        return [[]]
     groups = defaultdict(list)
 
     for s in strs:
         count = [0] * 26
         for ch in s:
-            count[ord(ch) - ord('a')] += 1
+            count[ord(ch) - ord("a")] += 1
         key = tuple(count)
         groups[key].append(s)
 

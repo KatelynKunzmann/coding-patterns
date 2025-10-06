@@ -1,4 +1,5 @@
 from collections import Counter
+import unicodedata
 
 """Leetcode problem 242: Valid Anagram https://leetcode.com/problems/valid-anagram/
 1) If they aren't the same length, return False
@@ -44,20 +45,53 @@ def isAnagramOptimized(s, t):
         Space: O(1) (array size 26, constant)
 """
 
+
 def isAnagramOptimal(s: str, t: str) -> bool:
     if len(s) != len(t):
         return False
+    counts = [0] * 26
+    base = ord("a")
+    for ch in s:
+        counts[ord(ch) - base] += 1
+    for ch in t:
+        counts[ord(ch) - base] -= 1
+    for count in counts:
+        if count != 0:
+            return False
+    return True
 
-    counts = [0] * 26  # one slot for each letter a-z
 
-    for c in s:
-        counts[ord(c) - ord('a')] += 1
+"""
+'What if we want case sensitivity?'
+The sorted and Counter solutions still work because they are case-sensitive by default. For the array solution, 
+we would expand our array to 52 and do the same thing except checking if it is capital or not prior to incrementing/decrementing the count in the array
+"""
 
-    for c in t:
-        counts[ord(c) - ord('a')] -= 1
 
-    # if all counts are zero, it’s an anagram
-    return all(x == 0 for x in counts)
+def isAnagramCaseSensitive(self, s: str, t: str) -> bool:
+    if len(s) != len(t):
+        return False
+    counts = [0] * 52
+    base_a = ord("a")
+    base_A = ord("A")
+
+    for ch in s:
+        if "a" <= ch <= "z":
+            counts[ord(ch) - base_a] += 1
+        elif "A" <= ch <= "Z":
+            counts[26 + ord(ch) - base_A] += 1
+
+    for ch in t:
+        if "a" <= ch <= "z":
+            counts[ord(ch) - base_a] -= 1
+        elif "A" <= ch <= "Z":
+            counts[26 + ord(ch) - base_A] -= 1
+
+    for count in counts:
+        if count != 0:
+            return False
+    return True
+
 
 """
 'What if the input strings include all unicode characters and we want to treat accented letters the same as unaccented letters?'
@@ -68,17 +102,13 @@ Space: O(n) now because ~150,000 unicode characters
 """
 
 
-from collections import Counter
-import unicodedata
-
-def isAnagram(s: str, t: str) -> bool:
+def isAnagramUnicode(s: str, t: str) -> bool:
     def normalize(text: str) -> str:
         # 1. Normalize Unicode (e.g., é → e + ´)
-        text = unicodedata.normalize('NFKD', text)
+        text = unicodedata.normalize("NFKD", text)
         # 2. Keep only alphanumeric characters
-        text = ''.join(c for c in text if c.isalnum())
+        text = "".join(c for c in text if c.isalnum())
         # 3. Lowercase everything
         return text.lower()
-    
-    return Counter(normalize(s)) == Counter(normalize(t))
 
+    return Counter(normalize(s)) == Counter(normalize(t))
