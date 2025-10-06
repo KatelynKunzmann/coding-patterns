@@ -38,6 +38,7 @@ Total space including output → O(nk)
 
 
 def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+    if not strs: return [[]]
     groups = defaultdict(list)
 
     for s in strs:
@@ -48,6 +49,22 @@ def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
 
 
 """
-There is a more optimal solution (for time) but a little too complicated - Fixed size array solution
-    Time: O(nk) — linear in total characters, faster than sorting approach
+'Can you do better than sorting each string?'
+Yes, we could keep track of the frequencies of the characters in an array for each string. 
+Use that as the key for our dictionary and add the original strings as the values. Then return the values.
+Time: O(nk)
+Space: O(nk)
 """
+
+def groupAnagramsOptimized(self, strs: List[str]) -> List[List[str]]:
+    if not strs: return [[]]
+    groups = defaultdict(list)
+
+    for s in strs:
+        count = [0] * 26
+        for ch in s:
+            count[ord(ch) - ord('a')] += 1
+        key = tuple(count)
+        groups[key].append(s)
+
+    return list(groups.values())

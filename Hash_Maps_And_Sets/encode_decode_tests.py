@@ -1,10 +1,10 @@
 # replace Codec with current solution file name to test
 
-from encode_decode_strings import Codec
+from encode_decode_sol import Codec_Sol
 
 
 def run_tests():
-    codec = Codec()
+    codec = Codec_Sol()
 
     test_cases = [
         ["hello", "world"],

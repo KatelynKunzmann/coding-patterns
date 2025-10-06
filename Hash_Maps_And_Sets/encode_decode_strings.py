@@ -17,16 +17,21 @@ Ex: s = "5#hello5#world"
 class Codec:
     def encode(self, strs):
         """Encodes a list of strings to a single string."""
-        return "".join(f"{len(s)}#{s}" for s in strs)
+        encoded_parts = []
+        for s in strs:
+            part = f"{len(s)}#{s}"
+            encoded_parts.append(part)
+        encoded_str = "".join(encoded_parts)
+        return encoded_str
+        # one liner: return "".join(f"{len(s)}#{s}" for s in strs)
 
     def decode(self, s):
         """Decodes a single string back to a list of strings."""
-        res = []
+        decoded_str = []
         i = 0
         while i < len(s):
-            # Find the next '#' to separate length from string
             j = s.find("#", i)
-            length = int(s[i:j])  # [start:end]
-            res.append(s[j + 1 : j + 1 + length])
+            length = int(s[i:j])
+            decoded_str.append(s[j+1:j+1+length])
             i = j + 1 + length
-        return res
+        return decoded_str

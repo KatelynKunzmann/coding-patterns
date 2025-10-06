@@ -39,7 +39,46 @@ def isAnagramOptimized(s, t):
     return Counter(s) == Counter(t)
 
 
-""" There is a more optimal solution than both of these, but it's a bit too complicated - fixed size array solution with ord()
+""" More optimal solution than both of these - fixed size array solution with ord()
         Time: O(n)
         Space: O(1) (array size 26, constant)
 """
+
+def isAnagramOptimal(s: str, t: str) -> bool:
+    if len(s) != len(t):
+        return False
+
+    counts = [0] * 26  # one slot for each letter a-z
+
+    for c in s:
+        counts[ord(c) - ord('a')] += 1
+
+    for c in t:
+        counts[ord(c) - ord('a')] -= 1
+
+    # if all counts are zero, it’s an anagram
+    return all(x == 0 for x in counts)
+
+"""
+'What if the input strings include all unicode characters and we want to treat accented letters the same as unaccented letters?'
+We could import the unicodedata libary and normalize the characters.
+Then use the Counter solution on the normalized strings. See Below (also accounts for case insensitivity and whitespace)
+Time: Still O(n)
+Space: O(n) now because ~150,000 unicode characters
+"""
+
+
+from collections import Counter
+import unicodedata
+
+def isAnagram(s: str, t: str) -> bool:
+    def normalize(text: str) -> str:
+        # 1. Normalize Unicode (e.g., é → e + ´)
+        text = unicodedata.normalize('NFKD', text)
+        # 2. Keep only alphanumeric characters
+        text = ''.join(c for c in text if c.isalnum())
+        # 3. Lowercase everything
+        return text.lower()
+    
+    return Counter(normalize(s)) == Counter(normalize(t))
+
