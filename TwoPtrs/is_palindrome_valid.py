@@ -31,8 +31,8 @@ def is_palindrome_valid(s: str) -> bool:
 """
 'What if you can delete at most one character and still want to check if it’s a palindrome?'
 Leetcode Problem 680: Valid Palindrome II https://leetcode.com/problems/valid-palindrome-ii/
-Space: O(n)
-Time: O(1)
+Time O(n)
+Space: O(1)
 """
 
 

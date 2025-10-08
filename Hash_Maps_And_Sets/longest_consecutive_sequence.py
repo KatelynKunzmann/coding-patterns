@@ -66,7 +66,7 @@ See below
 Time: O(n⋅logn)
 Space: O(1)
 
-We return max(longest, current) because in case we are at the end of the array - the else statement would not be entered
+We return max(longest, current) in case we are at the end of the array - the else statement would not be entered
 """
 
 

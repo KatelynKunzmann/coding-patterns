@@ -10,15 +10,16 @@ Space: O(1)
 
 
 def threeSum(self, nums: List[int]) -> List[List[int]]:
+    if not nums or len(nums) < 3:
+        return []
     nums.sort()
     triplets = []
     for i, num in enumerate(nums):
-        if nums[i] > 0:
+        if num > 0:
             break
         if i > 0 and num == nums[i - 1]:
             continue
-        left = i + 1
-        right = len(nums) - 1
+        left, right = i + 1, len(nums) - 1
         while left < right:
             threesum = num + nums[left] + nums[right]
             if threesum == 0:
