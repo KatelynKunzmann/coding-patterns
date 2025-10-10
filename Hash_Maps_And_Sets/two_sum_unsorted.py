@@ -14,3 +14,9 @@ def two_sum(nums: List[int], target: int) -> List[int]:
         if comp in num_map:
             return [num_map[comp], i]
         num_map[num] = i
+
+
+"""
+'Why can't we sort first and use two pointers?'
+We would lose their original indices
+"""
