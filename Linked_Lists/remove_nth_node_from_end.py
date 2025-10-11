@@ -9,7 +9,7 @@ Space: O(1)
 
 def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
     if not head:
-        return []
+        return None
     dummy = ListNode(-1)
     dummy.next = head
     leader = trailer = dummy
