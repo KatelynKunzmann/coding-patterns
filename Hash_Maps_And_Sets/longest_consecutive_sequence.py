@@ -73,11 +73,12 @@ We return max(longest, current) in case we are at the end of the array - the els
 def longestConsecutiveSorted(nums: List[int]) -> int:
     if not nums:
         return 0
+    nums.sort()
     longest = 1
     current = 1
     for i in range(1, len(nums)):
         if nums[i] == nums[i - 1]:
-            i += 1
+            continue
         elif nums[i] == (nums[i - 1] + 1):
             current += 1
         else:
