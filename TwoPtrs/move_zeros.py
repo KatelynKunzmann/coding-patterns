@@ -17,3 +17,17 @@ def moveZeroes(self, nums: List[int]) -> None:
     while shift < len(nums):
         nums[shift] = 0
         shift += 1
+
+
+"""
+'Can you do this in one pass instead of 2 while loops?'
+Yes, using a swap method.
+"""
+
+
+def moveZeroesOnePass(self, nums: List[int]) -> None:
+    slow = 0
+    for fast in range(len(nums)):
+        if nums[fast] != 0:
+            nums[slow], nums[fast] = nums[fast], nums[slow]
+            slow += 1
