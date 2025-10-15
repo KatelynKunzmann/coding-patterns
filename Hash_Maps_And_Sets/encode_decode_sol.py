@@ -34,6 +34,5 @@ print(decoded)        # ["hello###", "world"]
 class Codec_Sol:
     def encode(self, strs: List[str]) -> str:
 
-
     def decode(self, s: str) -> List[str]:
 
