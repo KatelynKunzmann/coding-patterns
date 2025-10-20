@@ -14,6 +14,8 @@ Space: O(n^2) + O(n^2) + O(n^2) = O(n^2)
 
 
 def isValidSudoku(self, board: List[List[str]]) -> bool:
+    if not board or not board[0]:
+        return False
     row_sets = [set() for _ in range(9)]
     col_sets = [set() for _ in range(9)]
     subgrid_sets = [[set() for _ in range(3)] for _ in range(3)]
@@ -68,6 +70,8 @@ Below is the bitmasking solution
 
 
 def isValidSudokuOptimized(board: List[List[str]]) -> bool:
+    if not board or not board[0]:
+        return False
     rows = [0] * 9
     cols = [0] * 9
     subgrids = [0] * 9
@@ -80,11 +84,9 @@ def isValidSudokuOptimized(board: List[List[str]]) -> bool:
             mask = 1 << (num - 1)
             subgrid_index = (r // 3) * 3 + (c // 3)
 
-            # Check duplicates
             if rows[r] & mask or cols[c] & mask or subgrids[subgrid_index] & mask:
                 return False
 
-            # Mark as seen
             rows[r] |= mask
             cols[c] |= mask
             subgrids[subgrid_index] |= mask
