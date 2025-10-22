@@ -2,7 +2,31 @@ from ds import ListNode
 from typing import Optional
 
 """Leetcode Problem 160: Intersection of Two Linked Lists https://leetcode.com/problems/intersection-of-two-linked-lists/
-Each pointer keeps switching lists until they eventually meet at the intersection, therefore each pointer will travel
+More intuitive approach
+1) HashSet storing visited nodes on one list
+2) Traverse other list checking if it has a node in the hash set
+Time: O(m + n)
+Space: O(m)
+"""
+
+
+def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+    if not headA or not headB:
+        return None
+    visited = set()
+    ptrA = headA
+    ptrB = headB
+    while ptrA:
+        visited.add(ptrA)
+        ptrA = ptrA.next
+    while ptrB:
+        if ptrB in visited:
+            return ptrB
+        ptrB = ptrB.next
+    return None
+
+
+"""Each pointer keeps switching lists until they eventually meet at the intersection, therefore each pointer will travel
 the total length of both lists combined:
 Ex: len(A) + len(B) = 6 + 4 = 10 steps
 
@@ -16,7 +40,9 @@ Space: O(1)
 """
 
 
-def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+def getIntersectionNodeOptimal(
+    self, headA: ListNode, headB: ListNode
+) -> Optional[ListNode]:
     if not headA or not headB:
         return None
 
@@ -24,10 +50,7 @@ def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[List
     ptrB = headB
 
     while ptrA != ptrB:
-        # Move ptrA forward, or switch to headB when it is none (reaches the end)
         ptrA = ptrA.next if ptrA else headB
-
-        # Move pointerB forward, or switch to headA when it is none (reaches the end)
         ptrB = ptrB.next if ptrB else headA
 
     return ptrA
