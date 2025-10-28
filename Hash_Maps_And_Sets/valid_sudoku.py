@@ -53,6 +53,7 @@ Yes, using bit masks.
 1. Represent rows, columns, and subgrids as 9-bit integers. Bits are indexed 0–8 (bit 0 = number 1, bit 1 = number 2, …, bit 8 = number 9).
 If seen, that bit is 1
 subgrid_index = (r//3) * 3 + c//3
+    - Use 2D array flattening formula: index = row_index * num_cols + col_index
 (r, c) range	subgrid_index
 (0–2, 0–2)	        0
 (0–2, 3–5)	        1
