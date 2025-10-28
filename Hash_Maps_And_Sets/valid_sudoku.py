@@ -38,7 +38,8 @@ def isValidSudoku(self, board: List[List[str]]) -> bool:
 
 """
 What if it wasn't a 9x9 board, but an nxn board?
-I would adjust like so: n = len(board)
+I would adjust like so: 
+n = len(board)
 subgrid_size = int(sqrt(n))
 and replace the corresponding numbers with those variables
 ------------------------
@@ -51,19 +52,31 @@ if num != '.' and (not num.isdigit() or not (1 <= int(num) <= n)):
 Yes, using bit masks. 
 1. Represent rows, columns, and subgrids as 9-bit integers. Bits are indexed 0–8 (bit 0 = number 1, bit 1 = number 2, …, bit 8 = number 9).
 If seen, that bit is 1
+subgrid_index = (r//3) * 3 + c//3
+(r, c) range	subgrid_index
+(0–2, 0–2)	        0
+(0–2, 3–5)	        1
+(0–2, 6–8)	        2
+(3–5, 0–2)	        3
+    etc.
 
 2. Check for dupes with bitwise AND & using the mask - rows[r] & mask isolates just the bit for num.
 mask = 1 << (num - 1)
+    - Because
+        3	1 << 2	000000100
+        9	1 << 8	100000000
+            etc.
+
 if rows[r] & mask:
-    return False  # duplicate detected
+    return False  
+        # bitwise AND (&) operation:
+        # If both numbers have the same bit set → result is nonzero (duplicate).
+        # If not → result is zero (no duplicate yet).
 
 3. If not a dupe, mark as aseen using bitwise OR | - OR operation sets the corresponding bit to 1 without changing other bits.
 rows[r] |= mask
 cols[c] |= mask
-subgrids[(r//3)*3 + c//3] |= mask
-
-4. Flatten subgrids into a single array of size 9
-subgrid_index = (r // 3) * 3 + (c // 3)
+subgrids[subgrid_index] |= mask
 
 Below is the bitmasking solution
 """
